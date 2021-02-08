@@ -12,11 +12,11 @@ class Password:
         sg.theme('Reddit')
 
         self.layout=[
-            [sg.Text('File and path to save the data',size=(23,1)), sg.Input(key='file',size=(60,1))],
+            [sg.Text('File name (e.g. file.txt)',size=(23,1)), sg.Input(key='file',size=(60,1))],
             [sg.Text('Email/User',size=(23,1)),sg.Input(key='user',size=(60,1))],
             [sg.Text('Site/Software',size=(23,1)), sg.Input(key='site',size=(60,1))],
             [sg.Text('Number of Characters',size=(23,1)), sg.Input(key='number',size=(60,1))],
-            #[sg.Output(size=(85,1))],
+            [sg.Output(size=(85,1))],
             [sg.Button('Generate Password')],
         ]
 
@@ -49,10 +49,19 @@ class Password:
 
             if self.event == 'Generate Password':
                 p.gen_pass()
+                p.save_file()
+                
+    #save data in file
+    def save_file(self):
+        with open(self.file,'a+') as file:
 
+            file.write('Site: '+self.site+'\n')
+            file.write('User: '+self.user+'\n')
+            file.write('Password: '+self.password+'\n')
+            file.write('___________________________\n')
+
+    #calculates the number of letters, numbers and characters
     def gen_pass(self):
-        #calculates the number of letters, numbers and characters
-
         n_letters_lower=1
         n_letters_upper=1
         n_num=1
