@@ -48,8 +48,8 @@ class Password:
                 break
 
             if self.event == 'Generate Password':
-                p.gen_pass()
-                p.save_file()
+                self.gen_pass()
+                self.save_file()
                 
     #save data in file
     def save_file(self):
